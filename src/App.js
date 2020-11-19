@@ -1,11 +1,21 @@
 import React from "react";
 import "./styles.css";
+import Pokemon from "./Pokemon";
+import Pokedox from "./Pokedox";
 
-export default function App() {
+import { Switch, Route } from "react-router-dom";
+
+const App = (props) => {
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-    </div>
+    <Switch>
+      <Route exact path="/" render={(props) => <Pokedox {...props} />} />
+      <Route
+        exact
+        path="/:pokemonId"
+        render={(props) => <Pokemon {...props} />}
+      />
+    </Switch>
   );
-}
+};
+
+export default App;
