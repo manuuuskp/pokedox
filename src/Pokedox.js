@@ -10,12 +10,19 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import data from "./data";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   gridContainer: {
-    paddingTop: 8,
-    paddingRight: 8,
-    paddingLeft: 16
+    paddingTop: 20,
+    paddingRight: 50,
+    paddingLeft: 50
+  },
+  cardMedia: {
+    margin: "auto"
+  },
+  cardConent: {
+    textAlign: "center"
   }
 });
 
@@ -26,18 +33,22 @@ const getPokeName = (name) => {
 const Pokedox = () => {
   const [pokedoxData, setPokedoxData] = useState(data);
   const classes = useStyles();
+  const history = useHistory();
 
   const getCardData = (pokeId) => {
     const { id, name, sprites } = pokedoxData[pokeId];
-    console.log(sprites);
     return (
       <Grid item xs={12} md={4} sm={6} key={id}>
-        <Card style={{ height: "300px", width: "300px" }}>
+        <Card
+          onClick={() => history.push(`/${pokeId}`)}
+          style={{ height: "300px", width: "300px" }}
+        >
           <CardMedia
             style={{ width: "130px", height: "130px" }}
             image={sprites["front_default"]}
+            className={classes.cardMedia}
           />
-          <CardContent>
+          <CardContent className={classes.cardConent}>
             <Typography>{`${id}.${getPokeName(name)}`}</Typography>
           </CardContent>
         </Card>
